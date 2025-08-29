@@ -1,29 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Chat App</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CODTECH — Real-time Chat (Frontend)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Login Screen -->
-  <div id="loginScreen">
-    <h2>Enter your name</h2>
-    <input type="text" id="usernameInput" placeholder="Your name">
-    <button onclick="login()">Join</button>
-  </div>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">CODTECH Chat</div>
+      <div class="status" id="status">Disconnected</div>
+    </header>
 
-  <!-- Chat Screen -->
-  <div id="chatScreen" style="display:none;">
-    <h2 id="welcome"></h2>
-    <div id="messages"></div>
-    <div class="input-area">
-      <input type="text" id="messageInput" placeholder="Type a message">
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
+    <aside class="sidebar">
+      <h3>Connection</h3>
+      <label>
+        Your name
+        <input id="username" type="text" value="Poshala Mounika" />
+      </label>
 
-  <script src="script.js"></script>
+      <label>
+        WebSocket URL
+        <input id="wsUrl" type="text" value="wss://echo.websocket.events" />
+      </label>
+
+      <div class="row">
+        <button id="connectBtn" class="btn primary">Connect</button>
+        <button id="disconnectBtn" class="btn" disabled>Disconnect</button>
+      </div>
+
+      <hr/>
+
+      <h4>Local Tools</h4>
+      <button id="clearHistory" class="btn">Clear History</button>
+      <button id="downloadLog" class="btn">Download Transcript</button>
+
+      <p class="note">Replace the WebSocket URL with your server (wss://...) for a real multi-user chat. The default is an echo server for demo.</p>
+    </aside>
+
+    <main class="chat">
+      <div id="messages" class="messages" aria-live="polite"></div>
+
+      <form id="sendForm" class="composer" autocomplete="off">
+        <input id="messageInput" placeholder="Type a message and press Enter…" />
+        <button type="submit" class="btn primary">Send</button>
+      </form>
+    </main>
+  </div>
 </body>
 </html>
