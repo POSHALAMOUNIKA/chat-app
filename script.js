@@ -1,40 +1,54 @@
-let username = "";
-let messages = [];
-
-// Load saved messages (so they stay after refresh)
-if (localStorage.getItem("messages")) {
-  messages = JSON.parse(localStorage.getItem("messages"));
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  background: #f4f4f9;
 }
 
-function login() {
-  username = document.getElementById("usernameInput").value.trim();
-  if (username) {
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("chatScreen").style.display = "block";
-    document.getElementById("welcome").innerText = "Welcome, " + username + " 👋";
-    renderMessages();
-  }
+#loginScreen {
+  margin-top: 100px;
 }
 
-function sendMessage() {
-  const input = document.getElementById("messageInput");
-  const text = input.value.trim();
-  if (text) {
-    const msg = { user: username, text: text };
-    messages.push(msg);
-    localStorage.setItem("messages", JSON.stringify(messages)); // save in browser
-    renderMessages();
-    input.value = "";
-  }
+#chatScreen {
+  max-width: 400px;
+  margin: auto;
 }
 
-function renderMessages() {
-  const box = document.getElementById("messages");
-  box.innerHTML = "";
-  messages.forEach(msg => {
-    const p = document.createElement("p");
-    p.innerHTML = <strong>${msg.user}:</strong> ${msg.text};
-    box.appendChild(p);
-  });
-  box.scrollTop = box.scrollHeight; // auto-scroll to bottom
+#messages {
+  border: 1px solid #ccc;
+  background: white;
+  width: 100%;
+  height: 300px;
+  margin: 20px auto;
+  padding: 10px;
+  overflow-y: scroll;
+  text-align: left;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+.input-area {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 70%;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
 }
